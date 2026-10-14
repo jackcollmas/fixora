@@ -1,0 +1,339 @@
+/* =========================================================
+   LAVALAMP BACKGROUND STYLES & COLOR VARIABLES
+   ========================================================= */
+
+:root {
+  /* Lavalamp Palette Defaults (Burnt Orange, Magma, Amber, Deep Charcoal) */
+  --lava-bg: #090807;
+  --lava-core-1: #FF5E0E;      /* Electric Magma Orange */
+  --lava-core-2: #F97316;      /* Fixora Primary Brand Orange */
+  --lava-accent-1: #FBBF24;    /* Warm Amber Honey */
+  --lava-accent-2: #EA580C;    /* Deep Fiery Terracotta */
+  --lava-deep-1: #991B1B;      /* Deep Magma Crimson Shadow */
+  --lava-deep-2: #C2410C;      /* Molten Clay */
+  --lava-glow: rgba(249, 115, 22, 0.45);
+  --lava-overlay: rgba(14, 12, 10, 0.55);
+}
+
+/* Base Viewport Container */
+.lavalamp-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--lava-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.lavalamp-viewport.lavalamp-fixed {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* Hidden SVG helper container */
+.lavalamp-svg-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Dark Ambient Backdrop with Vignette */
+.lavalamp-backdrop {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(24, 20, 16, 0.8) 0%, #080706 100%),
+    linear-gradient(180deg, rgba(13, 12, 10, 0.9) 0%, rgba(7, 6, 5, 0.98) 100%);
+  z-index: 1;
+}
+
+/* Liquid Blobs Stage */
+.lavalamp-stage {
+  position: absolute;
+  inset: -15% -15% -15% -15%;
+  width: 130%;
+  height: 130%;
+  z-index: 2;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, filter;
+}
+
+/* Generic Lava Blob */
+.lava-blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(20px);
+  will-change: transform, border-radius;
+}
+
+/* Blob 1: Center-Left Ascending Primary Molten Orb */
+.blob-1 {
+  width: 440px;
+  height: 520px;
+  left: 18%;
+  bottom: 8%;
+  background: radial-gradient(circle at 35% 35%, var(--lava-accent-1) 0%, var(--lava-core-1) 55%, var(--lava-deep-1) 100%);
+  opacity: 0.85;
+  box-shadow: 0 0 90px var(--lava-glow);
+  animation: lavaFloatOne 24s ease-in-out infinite alternate;
+}
+
+/* Blob 2: Right Main Orb Floating & Morphing */
+.blob-2 {
+  width: 520px;
+  height: 480px;
+  right: 15%;
+  top: 15%;
+  background: radial-gradient(circle at 45% 45%, #FFA048 0%, var(--lava-core-2) 50%, var(--lava-deep-2) 100%);
+  opacity: 0.8;
+  box-shadow: 0 0 100px rgba(234, 88, 12, 0.5);
+  animation: lavaFloatTwo 28s ease-in-out infinite alternate;
+}
+
+/* Blob 3: Deep Bottom Magma Base Surge */
+.blob-3 {
+  width: 680px;
+  height: 380px;
+  left: 30%;
+  bottom: -60px;
+  background: radial-gradient(circle at 50% 60%, var(--lava-core-1) 0%, var(--lava-deep-1) 60%, transparent 100%);
+  opacity: 0.75;
+  animation: lavaSurgeBottom 18s ease-in-out infinite alternate;
+}
+
+/* Blob 4: Top Floating Warm Sunspot */
+.blob-4 {
+  width: 380px;
+  height: 380px;
+  left: 45%;
+  top: 5%;
+  background: radial-gradient(circle at 40% 40%, var(--lava-accent-1) 0%, var(--lava-core-2) 65%, transparent 100%);
+  opacity: 0.65;
+  animation: lavaFloatThree 22s ease-in-out infinite alternate;
+}
+
+/* Blob 5: Small Quick Wanderer (Detaching and Rejoining effect) */
+.blob-5 {
+  width: 260px;
+  height: 260px;
+  left: 28%;
+  top: 38%;
+  background: radial-gradient(circle at 30% 30%, #FED7AA 0%, var(--lava-accent-1) 50%, var(--lava-core-1) 100%);
+  opacity: 0.75;
+  box-shadow: 0 0 60px rgba(251, 191, 36, 0.4);
+  animation: lavaWander 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+/* Blob 6: Gentle Giant Background Aura */
+.blob-6 {
+  width: 600px;
+  height: 600px;
+  right: 25%;
+  bottom: 20%;
+  background: radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.28) 0%, rgba(153, 27, 27, 0.15) 60%, transparent 80%);
+  opacity: 0.6;
+  animation: lavaPulseGlow 14s ease-in-out infinite alternate;
+}
+
+/* Diffuser Frosting Layer (Combines with blob goo for organic smooth lava lamp feel) */
+.lavalamp-diffuser {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(10, 9, 8, 0.6) 100%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 4px;
+}
+
+/* Ember micro-particles */
+.lavalamp-embers {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ember {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #FED7AA;
+  box-shadow: 0 0 8px #F97316;
+  opacity: 0.6;
+}
+
+.ember-1 { left: 22%; bottom: 10%; animation: floatUp 11s linear infinite; }
+.ember-2 { left: 45%; bottom: 15%; animation: floatUp 15s linear infinite 2s; }
+.ember-3 { left: 68%; bottom: 5%; animation: floatUp 13s linear infinite 4s; }
+.ember-4 { left: 82%; bottom: 20%; animation: floatUp 17s linear infinite 1s; }
+.ember-5 { left: 35%; bottom: 25%; animation: floatUp 12s linear infinite 5s; }
+
+/* Content Layer */
+.lavalamp-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   KEYFRAME MORPHS & LIQUID ANIMATIONS
+   ========================================================= */
+
+@keyframes lavaFloatOne {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  }
+  33% {
+    transform: translate(60px, -180px) scale(1.12) rotate(45deg);
+    border-radius: 65% 35% 42% 58% / 55% 65% 35% 45%;
+  }
+  66% {
+    transform: translate(-40px, -300px) scale(0.95) rotate(90deg);
+    border-radius: 50% 50% 30% 70% / 60% 30% 70% 40%;
+  }
+  100% {
+    transform: translate(80px, -420px) scale(1.08) rotate(140deg);
+    border-radius: 40% 60% 60% 40% / 40% 50% 50% 60%;
+  }
+}
+
+@keyframes lavaFloatTwo {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    transform: translate(-120px, 200px) scale(1.15) rotate(60deg);
+    border-radius: 35% 65% 55% 45% / 45% 55% 45% 55%;
+  }
+  100% {
+    transform: translate(40px, 350px) scale(0.92) rotate(120deg);
+    border-radius: 50% 50% 65% 35% / 35% 40% 60% 65%;
+  }
+}
+
+@keyframes lavaFloatThree {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+    border-radius: 45% 55% 60% 40% / 50% 50% 50% 50%;
+  }
+  50% {
+    transform: translate(140px, 120px) scale(1.18);
+    border-radius: 60% 40% 45% 55% / 40% 60% 40% 60%;
+  }
+  100% {
+    transform: translate(-80px, 220px) scale(0.88);
+    border-radius: 40% 60% 50% 50% / 55% 45% 55% 45%;
+  }
+}
+
+@keyframes lavaSurgeBottom {
+  0% {
+    transform: scaleX(1) scaleY(1);
+    border-radius: 50% 50% 20% 20% / 60% 60% 10% 10%;
+  }
+  50% {
+    transform: scaleX(1.15) scaleY(1.3) translateY(-40px);
+    border-radius: 45% 55% 25% 25% / 70% 70% 20% 20%;
+  }
+  100% {
+    transform: scaleX(0.95) scaleY(1.1) translateY(-15px);
+    border-radius: 55% 45% 20% 20% / 65% 65% 15% 15%;
+  }
+}
+
+@keyframes lavaWander {
+  0% {
+    transform: translate(0, 0) scale(1);
+    border-radius: 50%;
+  }
+  30% {
+    transform: translate(120px, -110px) scale(1.25);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  }
+  65% {
+    transform: translate(-140px, -220px) scale(0.85);
+    border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  }
+  100% {
+    transform: translate(60px, -340px) scale(1.1);
+    border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%;
+  }
+}
+
+@keyframes lavaPulseGlow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-90vh) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   VARIANTS: Cyber, Magma Intense, Subtle Minimal
+   ========================================================= */
+
+.lavalamp-variant-cyber {
+  --lava-core-1: #FF3B00;
+  --lava-core-2: #FF7700;
+  --lava-accent-1: #00F0FF; /* Cyber cyan contrast edge */
+  --lava-accent-2: #FFB703;
+  --lava-deep-1: #3A0CA3;
+  --lava-glow: rgba(255, 119, 0, 0.5);
+}
+
+.lavalamp-variant-intense {
+  --lava-core-1: #FF4500;
+  --lava-core-2: #FF8C00;
+  --lava-accent-1: #FFE066;
+  --lava-deep-1: #B91C1C;
+  --lava-glow: rgba(255, 69, 0, 0.7);
+}
+
+.lavalamp-variant-subtle {
+  --lava-core-1: rgba(249, 115, 22, 0.4);
+  --lava-core-2: rgba(234, 88, 12, 0.35);
+  --lava-accent-1: rgba(251, 191, 36, 0.3);
+  --lava-deep-1: rgba(153, 27, 27, 0.25);
+  --lava-glow: rgba(249, 115, 22, 0.2);
+}
